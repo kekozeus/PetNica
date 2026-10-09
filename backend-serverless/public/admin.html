@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f4f9f8">
+  <title>Administración · PetNica</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/admin.css">
+  <script src="/admin.js" defer></script>
+</head>
+<body>
+  <header class="admin-header">
+    <a class="logo" href="/">Pet<span>Nica</span><i>♥</i></a>
+    <a class="back-link" href="/">← Volver a la tienda</a>
+  </header>
+  <main>
+    <section class="login-card" id="loginView">
+      <span class="eyebrow">ACCESO PRIVADO</span>
+      <h1>Hola de nuevo.</h1>
+      <p>Inicia sesión para administrar tu tienda.</p>
+      <form id="loginForm">
+        <label>Correo de administrador<input name="email" type="email" autocomplete="username" maxlength="150" required></label>
+        <label>Contraseña<input name="password" type="password" autocomplete="current-password" required></label>
+        <p class="message error" id="loginError" role="alert" hidden></p>
+        <button class="button primary" type="submit">Iniciar sesión</button>
+      </form>
+      <small>La cuenta inicial se crea de forma segura desde tu computadora.</small>
+    </section>
+
+    <section id="adminView" hidden>
+      <div class="welcome">
+        <div><span class="eyebrow">PANEL DE CONTROL</span><h1>Tu tienda, en orden.</h1><p id="adminEmail"></p></div>
+        <button class="button outline" id="logoutButton" type="button">Cerrar sesión</button>
+      </div>
+      <nav class="tabs" aria-label="Secciones del panel">
+        <button type="button" aria-pressed="true" data-tab="products">Productos e inventario</button>
+        <button type="button" aria-pressed="false" data-tab="orders">Pedidos</button>
+      </nav>
+      <p class="message" id="globalMessage" role="status" hidden></p>
+
+      <section class="tab-panel" id="productsPanel">
+        <div class="section-title"><div><span class="eyebrow">CATÁLOGO</span><h2>Tus productos</h2></div><span id="productCount" class="count-pill">0</span></div>
+        <details class="create-box">
+          <summary>＋ Agregar un producto</summary>
+          <form id="createProductForm" class="product-form">
+            <div class="form-grid">
+              <label>Nombre<input name="name" maxlength="150" required></label>
+              <label>Slug de URL<input name="slug" maxlength="160" placeholder="se-genera-desde-el-nombre"></label>
+              <label>Categoría<select name="categoryId" required></select></label>
+              <label>Para<select name="species" required><option value="perro">Perro</option><option value="gato">Gato</option><option value="ambos">Perro y gato</option></select></label>
+              <label>Presentación inicial<input name="presentation" maxlength="60" placeholder="Bolsa 2 kg" required></label>
+              <label>SKU<input name="sku" maxlength="40" required></label>
+              <label>Precio (C$)<input name="price" type="number" min="0" step="0.01" required></label>
+              <label>Existencias<input name="stock" type="number" min="0" step="1" required></label>
+            </div>
+            <label>Descripción<textarea name="description" maxlength="5000" rows="2"></textarea></label>
+            <button class="button primary" type="submit">Crear producto</button>
+          </form>
+        </details>
+        <div class="product-list" id="productList"></div>
+      </section>
+
+      <section class="tab-panel" id="ordersPanel" hidden>
+        <div class="section-title"><div><span class="eyebrow">VENTAS</span><h2>Pedidos recientes</h2></div><span class="count-pill" id="orderCount">0</span></div>
+        <p class="help-text">Se muestran los últimos 100 pedidos. Al cancelar uno, las unidades vuelven al inventario.</p>
+        <div class="order-list" id="orderList"></div>
+      </section>
+    </section>
+  </main>
+  <footer><span>PetNica · Administración segura</span><a href="/">Ir a la tienda</a></footer>
+</body>
+</html>

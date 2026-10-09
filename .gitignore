@@ -1,0 +1,7 @@
+node_modules/
+.vscode/settings.json
+.env
+.env.*
+!.env.example
+.vercel/
+npm-debug.log*

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f4f9f8">
+  <meta name="description" content="Alimentos, accesorios y PetBox para consentir a tu mascota. PetNica entrega en Managua.">
+  <title>PetNica · Todo para ellos, fácil para ti</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <div class="promo">🐾 10% de descuento en tu primera compra con el código <b>PETNICA10</b></div>
+  <header class="top">
+    <div class="wrap bar">
+      <a class="logo" href="#top" aria-label="PetNica, inicio">Pet<span>Nica</span><i>♥</i></a>
+      <nav class="links" aria-label="Navegación principal">
+        <a href="#tienda">Tienda</a>
+        <a href="#petbox">PetBox</a>
+        <a href="#como">Cómo funciona</a>
+      </nav>
+      <button class="accountbtn" id="openAccount" type="button">Mi cuenta</button>
+      <button class="cartbtn" id="openCart" aria-label="Abrir carrito">Mi carrito <b id="count">0</b></button>
+    </div>
+  </header>
+
+  <main id="top" class="wrap">
+    <section class="hero">
+      <div class="hero-copy">
+        <span class="eyebrow"><span></span> Hecho con amor para sus patitas</span>
+        <h1>Todo para ellos, <em>fácil</em> para ti.</h1>
+        <p class="lead" id="lead">Estamos cargando nuestra tienda para ti…</p>
+        <div class="pick" role="group" aria-label="¿Para quién compras?">
+          <button data-species="perro" aria-pressed="true"><span class="em">🐶</span>Para mi perro</button>
+          <button data-species="gato" aria-pressed="false"><span class="em">🐱</span>Para mi gato</button>
+        </div>
+        <a class="btn" href="#tienda">Descubrir productos <span aria-hidden="true">→</span></a>
+        <div class="hero-note"><span>✦</span> Entrega a domicilio en Managua</div>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <div class="art-orbit orbit-one"></div><div class="art-orbit orbit-two"></div>
+        <div class="stage" id="stage"><img src="/images/hero-perro.png" alt="" onerror="this.hidden=true;this.nextElementSibling.hidden=false"><span id="stageEm" hidden>🐶</span></div>
+        <span class="float-tag tag-top">mucho amor <b>♥</b></span>
+        <span class="float-tag tag-bottom">🐾 felices juntos</span>
+        <span class="spark spark-one">✳</span><span class="spark spark-two">✦</span>
+      </div>
+    </section>
+
+    <div class="trust-row" aria-label="Beneficios">
+      <div><span>🚚</span><b>Hasta tu puerta</b><small>En Managua y alrededores</small></div>
+      <div><span>💚</span><b>Elegido con cariño</b><small>Para cada etapa de su vida</small></div>
+      <div><span>💬</span><b>Atención cercana</b><small>Estamos aquí para ayudarte</small></div>
+    </div>
+
+    <section id="tienda" class="shop-section">
+      <div class="section-heading">
+        <div><span class="eyebrow">SU PRÓXIMO FAVORITO</span><h2 id="tTitle">Nuestra tienda</h2></div>
+        <p class="sub">Lo bueno para ellos, sin complicaciones para ti.</p>
+      </div>
+      <div class="chips" id="chips" role="group" aria-label="Filtrar por categoría"></div>
+      <div class="grid" id="grid" aria-live="polite"><p class="empty">Conectando con el catálogo…</p></div>
+    </section>
+
+    <section id="petbox" class="petbox-section">
+      <div class="box">
+        <div class="box-copy">
+          <span class="eyebrow">UNA SORPRESA CADA MES</span>
+          <h2>Su felicidad,<br>en una caja.</h2>
+          <p class="sub">Snacks, un juguete y un artículo de higiene elegidos según su tamaño y necesidades.</p>
+          <div class="sizes" id="sizes" role="group" aria-label="Planes PetBox"></div>
+        </div>
+        <div class="box-visual">
+          <span class="box-doodle doodle-one">✳</span><span class="box-doodle doodle-two">♥</span>
+          <div class="gift-box" aria-hidden="true"><span>🐾</span><b>PET<br>BOX</b></div>
+          <div class="box-price-wrap"><small>Desde</small><div class="big" id="boxPrice">—</div><small>por mes · pausa cuando quieras</small></div>
+          <button class="btn" id="addBox">Quiero mi PetBox <span aria-hidden="true">→</span></button>
+        </div>
+      </div>
+    </section>
+
+    <section id="como" class="how-section">
+      <span class="eyebrow">ASÍ DE FÁCIL</span>
+      <h2>Más tiempo para jugar.</h2>
+      <p class="sub">Nosotros nos encargamos del resto.</p>
+      <ol class="steps">
+        <li><span>01</span><b>Elige sus favoritos</b><small>Encuentra justo lo que necesita.</small></li>
+        <li><span>02</span><b>Haz tu pedido</b><small>Rápido, seguro y desde tu celular.</small></li>
+        <li><span>03</span><b>Cuéntanos dónde</b><small>Indica tu distrito y referencia.</small></li>
+        <li><span>04</span><b>¡A disfrutar!</b><small>Lo llevamos hasta tu puerta.</small></li>
+      </ol>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap footer-inner">
+      <div><a class="logo" href="#top">Pet<span>Nica</span><i>♥</i></a><p>Una vida más feliz, patita a patita.</p></div>
+      <div class="footer-right"><span>Managua, Nicaragua</span><span>Instagram · Facebook · TikTok · WhatsApp</span><small>© <span id="year"></span> PetNica · Hecho con amor 🐾</small></div>
+    </div>
+  </footer>
+
+  <div class="veil" id="veil"></div>
+  <aside id="cart" aria-label="Carrito de compras" aria-hidden="true" inert>
+    <div class="cart-head"><div><span class="eyebrow">CASI TUYO</span><h2>Tu pedido <span id="cartCountLabel"></span></h2></div><button class="close-btn" id="closeCart" aria-label="Cerrar carrito">×</button></div>
+    <div id="items"></div>
+    <form id="checkout">
+      <h3>¿A dónde lo llevamos?</h3>
+      <div class="form-grid">
+        <label>Nombre<input name="firstName" autocomplete="given-name" maxlength="80" required></label>
+        <label>Apellido<input name="lastName" autocomplete="family-name" maxlength="80" required></label>
+      </div>
+      <label>Correo electrónico<input name="email" type="email" autocomplete="email" maxlength="150" required></label>
+      <label>WhatsApp (opcional)<input name="phone" type="tel" autocomplete="tel" maxlength="20" placeholder="+505 8888 0000"></label>
+      <label>Distrito de entrega<select name="zoneId" id="zone" required><option value="">Cargando zonas…</option></select></label>
+      <label>Barrio o residencial<input name="neighborhood" maxlength="100" required></label>
+      <label>Referencia para llegar<textarea name="reference" rows="2" maxlength="2000" placeholder="Ej.: del semáforo, 2 cuadras al lago" required></textarea></label>
+      <div id="petFields" hidden>
+        <h3>Un detalle para su PetBox</h3>
+        <label>Nombre de tu mascota<input name="petName" maxlength="80"></label>
+        <label id="sizeField">Tamaño de tu perro
+          <select name="petSize"><option value="">Selecciona el tamaño</option><option value="pequeño">Pequeño</option><option value="mediano">Mediano</option><option value="grande">Grande</option></select>
+        </label>
+      </div>
+      <label>Método de pago<select name="paymentMethod" required><option value="">Selecciona una opción</option><option value="efectivo_contra_entrega">Efectivo contra entrega</option><option value="transferencia">Transferencia bancaria</option></select></label>
+      <label class="promo-check"><input type="checkbox" id="promo"> Tengo el código <b>PETNICA10</b> (primera compra)</label>
+      <div class="sum" id="sum"></div>
+      <p class="shipping-note">El envío se confirma según tu distrito. Tu pedido quedará registrado y podrás confirmarlo también por WhatsApp.</p>
+      <p class="checkout-account-note" id="checkoutAccountNote" hidden>Para confirmar un pedido, inicia sesión o crea una cuenta. <button class="text-button" id="checkoutAccount" type="button">Mi cuenta</button></p>
+      <p class="checkout-error" id="checkoutError" role="alert" hidden></p>
+      <button class="btn submit-btn" id="submitOrder" type="submit">Confirmar pedido</button>
+      <div class="order-success" id="orderSuccess" role="status" hidden></div>
+    </form>
+  </aside>
+
+  <dialog class="product-dialog" id="productDialog" aria-labelledby="productDialogTitle">
+    <div class="product-dialog-head">
+      <span class="eyebrow">DESCUBRE SU PRÓXIMO FAVORITO</span>
+      <button class="close-btn" id="closeProductDialog" type="button" aria-label="Cerrar detalle del producto">×</button>
+    </div>
+    <div id="productDetailContent"></div>
+  </dialog>
+
+  <dialog class="account-dialog" id="accountDialog" aria-labelledby="accountTitle">
+    <div class="account-head">
+      <div><span class="eyebrow">TU ESPACIO PETNICA</span><h2 id="accountTitle">Mi cuenta</h2></div>
+      <button class="close-btn" id="closeAccount" type="button" aria-label="Cerrar mi cuenta">×</button>
+    </div>
+    <div id="authView">
+      <p class="sub">Inicia sesión para guardar tu carrito y tener tus pedidos siempre a mano.</p>
+      <div class="auth-switch" role="group" aria-label="Tipo de acceso">
+        <button type="button" aria-pressed="true" data-auth-mode="login">Iniciar sesión</button>
+        <button type="button" aria-pressed="false" data-auth-mode="register">Crear cuenta</button>
+      </div>
+      <a class="google-button" id="googleLogin" href="/api/account/google" hidden><span>G</span> Continuar con Google</a>
+      <div class="auth-divider" id="authDivider" hidden><span>o con tu correo</span></div>
+      <section id="loginSection" class="auth-section" aria-labelledby="loginTitle">
+        <h3 id="loginTitle">Bienvenida/o de vuelta</h3>
+        <p class="auth-description">Accede a tu cuenta para ver tus pedidos y tu carrito guardado.</p>
+        <form id="loginForm" class="account-form">
+          <label>Correo electrónico<input name="email" type="email" autocomplete="email" maxlength="150" required></label>
+          <label>Contraseña<input name="password" type="password" autocomplete="current-password" required></label>
+          <button class="btn" type="submit">Iniciar sesión</button>
+        </form>
+      </section>
+      <section id="registerSection" class="auth-section" aria-labelledby="registerTitle" hidden>
+        <h3 id="registerTitle">Crea tu cuenta PetNica</h3>
+        <p class="auth-description">Guarda tu carrito y ten tus pedidos siempre a mano.</p>
+        <form id="registerForm" class="account-form">
+          <div class="form-grid">
+            <label>Nombre<input name="firstName" autocomplete="given-name" maxlength="80" required></label>
+            <label>Apellido<input name="lastName" autocomplete="family-name" maxlength="80" required></label>
+          </div>
+          <label>Correo electrónico<input name="email" type="email" autocomplete="email" maxlength="150" required></label>
+          <label>WhatsApp (opcional)<input name="phone" type="tel" autocomplete="tel" maxlength="20" placeholder="+505 8888 0000"></label>
+          <label>Contraseña<input name="password" type="password" autocomplete="new-password" minlength="12" required><small>Usa al menos 12 caracteres.</small></label>
+          <button class="btn" type="submit">Crear mi cuenta</button>
+        </form>
+      </section>
+      <p class="account-error" id="accountError" role="alert" hidden></p>
+      <p class="account-note">Al crear una cuenta, tus datos se guardan de forma segura en PetNica. La contraseña nunca se almacena en texto plano.</p>
+    </div>
+    <div id="customerView" hidden>
+      <div class="customer-summary"><div class="customer-avatar" aria-hidden="true">🐾</div><div><b id="customerName"></b><small id="customerEmail"></small></div><button class="btn alt account-logout" id="accountLogout" type="button">Salir</button></div>
+      <div class="orders-heading"><div><span class="eyebrow">TU HISTORIAL</span><h3>Mis pedidos</h3></div></div>
+      <div id="customerOrders" class="customer-orders"></div>
+    </div>
+  </dialog>
+</body>
+</html>

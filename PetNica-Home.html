@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>PetNica · Todo para ellos, fácil para ti</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito+Sans:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F4F9F8;--surface:#FFFFFF;--ink:#0E3B3A;--muted:#4F6F6D;--line:#D5E5E2;--aqua:#1F9E8F;--mango:#FFB020;--berry:#D93A62;--on-mango:#0E3B3A;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0B1F1F;--surface:#12302F;--ink:#EAF6F4;--muted:#9CBAB6;--line:#244746}}
+:root[data-theme="dark"]{--bg:#0B1F1F;--surface:#12302F;--ink:#EAF6F4;--muted:#9CBAB6;--line:#244746}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 70px);scroll-behavior:smooth}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1rem/1.55 'Nunito Sans',system-ui,sans-serif}
+h1,h2,h3,.logo{font-family:'Baloo 2','Trebuchet MS',sans-serif;line-height:1.05;margin:0}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+a{color:inherit}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--aqua);outline-offset:2px}
+.promo{background:var(--mango);color:var(--on-mango);text-align:center;padding:8px 16px;font-weight:700;font-size:.95rem}
+header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line)}
+.bar{display:flex;align-items:center;justify-content:space-between;height:60px;gap:12px}
+.logo{font-size:1.7rem;font-weight:800;text-decoration:none}
+.logo span{color:var(--aqua)}
+nav.links{display:flex;gap:22px;font-weight:700}
+nav.links a{text-decoration:none;color:var(--muted)}
+nav.links a:hover{color:var(--ink)}
+.btn{border:0;border-radius:999px;padding:12px 22px;font-weight:700;background:var(--mango);color:var(--on-mango)}
+.btn.alt{background:transparent;border:2px solid var(--line);color:var(--ink)}
+.cartbtn{border:2px solid var(--line);background:var(--surface);border-radius:999px;padding:8px 16px;font-weight:700}
+.cartbtn b{background:var(--berry);color:#fff;border-radius:999px;padding:1px 8px;margin-left:6px;font-size:.85rem}
+.hero{display:grid;grid-template-columns:1.25fr .75fr;gap:36px;align-items:center;padding:56px 0 40px}
+.hero h1{font-size:clamp(2.5rem,7vw,4.6rem);font-weight:800;max-width:11ch}
+.hero p.lead{font-size:1.15rem;color:var(--muted);max-width:44ch;margin:18px 0 22px;min-height:3.2em}
+.pick{display:flex;gap:12px;margin-bottom:22px;flex-wrap:wrap}
+.pick button{display:flex;align-items:center;gap:10px;border:2px solid var(--line);background:var(--surface);border-radius:18px;padding:12px 20px;font-weight:700;font-size:1.05rem}
+.pick button[aria-pressed="true"]{border-color:var(--aqua);box-shadow:0 0 0 3px color-mix(in srgb,var(--aqua) 28%,transparent)}
+.pick .em{font-size:1.7rem}
+.stage{aspect-ratio:1;border-radius:50%;background:var(--aqua);display:grid;place-items:center;font-size:clamp(6rem,18vw,10rem);max-width:340px;width:100%;justify-self:center}
+.stage span{display:block}
+.stage.bounce span{animation:pop .5s cubic-bezier(.3,1.6,.5,1)}
+@keyframes pop{from{transform:scale(.6) rotate(-12deg)}to{transform:none}}
+section{padding:36px 0}
+h2{font-size:clamp(1.7rem,4vw,2.4rem);font-weight:800;margin-bottom:6px}
+.sub{color:var(--muted);margin:0 0 20px}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:22px}
+.chips button{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:7px 14px;font-weight:700;font-size:.92rem}
+.chips button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:18px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:14px;display:flex;flex-direction:column}
+.tile{border-radius:12px;background:color-mix(in srgb,var(--mango) 30%,var(--surface));aspect-ratio:4/3;display:grid;place-items:center;font-size:3.2rem;margin-bottom:12px}
+.card h3{font-size:1.15rem}
+.card small{color:var(--muted)}
+.card .row{display:flex;align-items:center;justify-content:space-between;margin-top:auto;padding-top:12px}
+.price{font-weight:700;font-size:1.1rem}
+.card .btn{padding:8px 16px;font-size:.92rem}
+.empty{color:var(--muted);grid-column:1/-1}
+.box{display:grid;grid-template-columns:1fr 1fr;gap:32px;background:var(--surface);border:1px solid var(--line);border-radius:24px;padding:32px}
+.sizes{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:16px 0}
+.sizes button{border:2px solid var(--line);background:transparent;border-radius:14px;padding:12px;font-weight:700;text-align:left}
+.sizes button[aria-pressed="true"]{border-color:var(--aqua);background:color-mix(in srgb,var(--aqua) 14%,transparent)}
+.big{font-family:'Baloo 2',sans-serif;font-size:2.4rem;font-weight:800}
+ol.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;list-style:none;padding:0;margin:0;counter-reset:s}
+ol.steps li{counter-increment:s;border-top:3px solid var(--aqua);padding-top:12px;font-weight:700}
+ol.steps li::before{content:counter(s);display:block;font-family:'Baloo 2',sans-serif;font-size:1.8rem;color:var(--aqua)}
+footer{border-top:1px solid var(--line);padding:28px 0;color:var(--muted);font-size:.95rem;margin-top:24px}
+footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.veil{position:fixed;inset:0;background:rgba(0,0,0,.45);opacity:0;pointer-events:none;transition:opacity .2s;z-index:9}
+.veil.on{opacity:1;pointer-events:auto}
+aside#cart{position:fixed;top:0;right:0;bottom:0;width:min(400px,100%);background:var(--bg);z-index:10;transform:translateX(100%);transition:transform .25s;display:flex;flex-direction:column;padding:calc(18px + env(safe-area-inset-top,0px)) 18px calc(18px + env(safe-area-inset-bottom,0px));border-left:1px solid var(--line)}
+aside#cart.on{transform:none}
+#items{flex:1;overflow:auto;margin:14px 0}
+.line{display:flex;justify-content:space-between;gap:10px;padding:10px 0;border-bottom:1px solid var(--line)}
+.qty{display:flex;align-items:center;gap:8px;margin-top:4px}
+.qty button{width:28px;height:28px;border-radius:50%;border:1px solid var(--line);background:var(--surface)}
+.sum div{display:flex;justify-content:space-between;padding:3px 0}
+@media (max-width:760px){
+ nav.links{display:none}
+ .hero{grid-template-columns:1fr;padding-top:32px}
+ .stage{max-width:200px;order:-1;justify-self:start}
+ .box{grid-template-columns:1fr;padding:22px}
+ ol.steps{grid-template-columns:1fr 1fr}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<div class="promo">10% de descuento en tu primera compra con el código PETNICA10</div>
+<header class="top"><div class="wrap bar">
+  <a class="logo" href="#top">Pet<span>Nica</span></a>
+  <nav class="links" aria-label="Principal"><a href="#tienda">Tienda</a><a href="#petbox">PetBox</a><a href="#como">Cómo funciona</a></nav>
+  <button class="cartbtn" id="openCart" aria-label="Abrir carrito">Carrito<b id="count">0</b></button>
+</div></header>
+
+<main id="top" class="wrap">
+  <div class="hero">
+    <div>
+      <h1>Todo para ellos, fácil para ti.</h1>
+      <p class="lead" id="lead"></p>
+      <div class="pick" role="group" aria-label="¿Para quién compras?">
+        <button data-sp="perro" aria-pressed="true"><span class="em">🐶</span>Para mi perro</button>
+        <button data-sp="gato" aria-pressed="false"><span class="em">🐱</span>Para mi gato</button>
+      </div>
+      <a class="btn" href="#tienda" style="text-decoration:none;display:inline-block">Ver productos</a>
+    </div>
+    <div class="stage" id="stage" aria-hidden="true"><span id="stageEm">🐶</span></div>
+  </div>
+
+  <section id="tienda">
+    <h2 id="tTitle"></h2>
+    <p class="sub">Entrega a domicilio en Managua. Precios de ejemplo en córdobas.</p>
+    <div class="chips" id="chips" role="group" aria-label="Categorías"></div>
+    <div class="grid" id="grid"></div>
+  </section>
+
+  <section id="petbox">
+    <div class="box">
+      <div>
+        <h2>La PetBox: una caja pensada para tu mascota</h2>
+        <p class="sub">Cada mes te llegan snacks, un juguete y un artículo de higiene elegidos según su tamaño y necesidades.</p>
+        <p style="margin:0">Elige el plan de tu mascota:</p>
+        <div class="sizes" id="sizes" role="group" aria-label="Plan PetBox"></div>
+      </div>
+      <div style="display:flex;flex-direction:column;justify-content:center;gap:12px">
+        <div class="big" id="boxPrice"></div>
+        <p class="sub" style="margin:0">Pagas cada mes y puedes pausar cuando quieras.</p>
+        <button class="btn" id="addBox" style="align-self:flex-start">Pedir mi PetBox</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="como">
+    <h2>Así de fácil</h2>
+    <p class="sub">Sin recorrer toda la ciudad.</p>
+    <ol class="steps"><li>Entro a PetNica</li><li>Encuentro lo que necesito</li><li>Compro desde el celular</li><li>Me lo llevan a casa</li></ol>
+  </section>
+</main>
+
+<footer><div class="wrap"><div><b>PetNica</b> · Tienda en línea para perros y gatos · Managua, Nicaragua</div><div>Instagram · Facebook · TikTok · WhatsApp</div></div></footer>
+
+<div class="veil" id="veil"></div>
+<aside id="cart" aria-label="Carrito de compras" aria-hidden="true">
+  <div style="display:flex;justify-content:space-between;align-items:center"><h2 style="margin:0">Tu pedido</h2><button class="btn alt" id="closeCart" style="padding:6px 14px">Cerrar</button></div>
+  <div id="items"></div>
+  <label style="display:flex;gap:8px;align-items:center;margin-bottom:10px"><input type="checkbox" id="promo"> Tengo el código PETNICA10 (primera compra)</label>
+  <div class="sum" id="sum"></div>
+  <p class="sub" style="font-size:.88rem;margin:8px 0 12px">El envío se confirma por WhatsApp según tu distrito.</p>
+  <a class="btn" id="wa" target="_blank" rel="noopener" style="text-align:center;text-decoration:none">Pedir por WhatsApp</a>
+</aside>
+
+<script>
+const WA='50588880000'; // cambia por el número real de WhatsApp Business
+const CATS=['Alimentos','Premios y snacks','Juguetes','Camas y accesorios','Collares y personalizados','Higiene'];
+const P=[
+{id:1,sp:'perro',cat:'Alimentos',name:'Alimento seco adulto',pres:'Bolsa 2 kg',price:520,e:'🍖'},
+{id:2,sp:'perro',cat:'Juguetes',name:'Pelota de goma resistente',pres:'Talla M',price:180,e:'🎾'},
+{id:3,sp:'perro',cat:'Premios y snacks',name:'Premios de pollo',pres:'Bolsa 200 g',price:90,e:'🦴'},
+{id:4,sp:'perro',cat:'Camas y accesorios',name:'Cama acolchada',pres:'Mediana',price:780,e:'🛏️'},
+{id:5,sp:'perro',cat:'Collares y personalizados',name:'Collar con nombre',pres:'Grabado incluido',price:250,e:'🏷️'},
+{id:6,sp:'gato',cat:'Higiene',name:'Arena sanitaria',pres:'Bolsa 5 kg',price:380,e:'🪣'},
+{id:7,sp:'gato',cat:'Camas y accesorios',name:'Rascador de sisal',pres:'Torre pequeña',price:450,e:'🧶'},
+{id:8,sp:'gato',cat:'Alimentos',name:'Alimento seco para gato',pres:'Bolsa 2 kg',price:480,e:'🐟'},
+{id:9,sp:'gato',cat:'Premios y snacks',name:'Snack de atún',pres:'Bolsa 80 g',price:85,e:'🍣'},
+{id:10,sp:'gato',cat:'Juguetes',name:'Caña con plumas',pres:'Unidad',price:70,e:'🪶'},
+{id:11,sp:'ambos',cat:'Higiene',name:'Shampoo hipoalergénico',pres:'Botella 250 ml',price:210,e:'🧼'}];
+const BOX={'Perro pequeño':600,'Perro mediano':700,'Perro grande':850,'Gato':550};
+const COPY={perro:{lead:'Alimento, juguetes y camas para perros de todos los tamaños, directo a tu puerta.',t:'Lo que necesita tu perro',e:'🐶'},
+            gato:{lead:'Arena, rascadores y snacks para gatos que mandan en casa, directo a tu puerta.',t:'Lo que necesita tu gato',e:'🐱'}};
+let sp='perro',cat='Todo',box='Perro mediano',cart=[],promo=false;
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const money=n=>'C$ '+n.toLocaleString('es-NI');
+
+function setSp(v){sp=v;cat='Todo';
+ $$('.pick button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.sp===v));
+ $('#lead').textContent=COPY[v].lead;$('#tTitle').textContent=COPY[v].t;$('#stageEm').textContent=COPY[v].e;
+ const s=$('#stage');s.classList.remove('bounce');void s.offsetWidth;s.classList.add('bounce');
+ box=v==='gato'?'Gato':(box==='Gato'?'Perro mediano':box);
+ chips();grid();sizes();}
+function chips(){$('#chips').innerHTML=['Todo',...CATS].map(c=>`<button aria-pressed="${c===cat}" data-c="${c}">${c}</button>`).join('');
+ $$('#chips button').forEach(b=>b.onclick=()=>{cat=b.dataset.c;chips();grid();});}
+function grid(){const L=P.filter(p=>(p.sp===sp||p.sp==='ambos')&&(cat==='Todo'||p.cat===cat));
+ $('#grid').innerHTML=L.length?L.map(p=>`<article class="card"><div class="tile" aria-hidden="true">${p.e}</div><h3>${p.name}</h3><small>${p.pres}</small><div class="row"><span class="price">${money(p.price)}</span><button class="btn" data-id="${p.id}">Agregar</button></div></article>`).join(''):'<p class="empty">Pronto tendremos productos en esta categoría.</p>';
+ $$('#grid [data-id]').forEach(b=>b.onclick=()=>add(+b.dataset.id));}
+function sizes(){$('#sizes').innerHTML=Object.keys(BOX).map(k=>`<button aria-pressed="${k===box}" data-b="${k}">${k}</button>`).join('');
+ $('#boxPrice').textContent=money(BOX[box])+' al mes';
+ $$('#sizes button').forEach(b=>b.onclick=()=>{box=b.dataset.b;sizes();});}
+function add(id,item){const p=item||P.find(x=>x.id===id);const k=item?item.id:id;
+ const f=cart.find(c=>c.id===k);f?f.qty++:cart.push({id:k,name:p.name,price:p.price,qty:1});renderCart();openCart();}
+function change(id,d){const f=cart.find(c=>c.id===id);f.qty+=d;if(f.qty<=0)cart=cart.filter(c=>c.id!==id);renderCart();}
+function renderCart(){const n=cart.reduce((a,c)=>a+c.qty,0);$('#count').textContent=n;
+ $('#items').innerHTML=cart.length?cart.map(c=>`<div class="line"><div><b>${c.name}</b><div class="qty"><button aria-label="Quitar uno" data-d="-1" data-i="${c.id}">−</button>${c.qty}<button aria-label="Agregar uno" data-d="1" data-i="${c.id}">+</button></div></div><b>${money(c.price*c.qty)}</b></div>`).join(''):'<p class="sub">Tu carrito está vacío. Agrega algo para tu mascota.</p>';
+ $$('#items [data-i]').forEach(b=>b.onclick=()=>change(b.dataset.i.startsWith('box')?b.dataset.i:+b.dataset.i,+b.dataset.d));
+ const sub=cart.reduce((a,c)=>a+c.price*c.qty,0),dis=promo?Math.round(sub*.1):0;
+ $('#sum').innerHTML=`<div><span>Subtotal</span><span>${money(sub)}</span></div>`+(promo?`<div><span>PETNICA10</span><span>− ${money(dis)}</span></div>`:'')+`<div><b>Total sin envío</b><b>${money(sub-dis)}</b></div>`;
+ const msg='Hola PetNica 🐾, quiero pedir:\n'+cart.map(c=>`- ${c.qty} x ${c.name} (${money(c.price*c.qty)})`).join('\n')+(promo?'\nCódigo: PETNICA10':'')+`\nTotal sin envío: ${money(sub-dis)}\n¿Me confirman el envío a mi distrito?`;
+ const w=$('#wa');w.href=cart.length?`https://wa.me/${WA}?text=${encodeURIComponent(msg)}`:'#';w.style.opacity=cart.length?1:.5;}
+function openCart(){$('#cart').classList.add('on');$('#veil').classList.add('on');$('#cart').setAttribute('aria-hidden','false');}
+function closeCart(){$('#cart').classList.remove('on');$('#veil').classList.remove('on');$('#cart').setAttribute('aria-hidden','true');}
+$$('.pick button').forEach(b=>b.onclick=()=>setSp(b.dataset.sp));
+$('#addBox').onclick=()=>add(0,{id:'box-'+box,name:'PetBox '+box,price:BOX[box]});
+$('#promo').onchange=e=>{promo=e.target.checked;renderCart();};
+$('#openCart').onclick=openCart;$('#closeCart').onclick=closeCart;$('#veil').onclick=closeCart;
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeCart();});
+setSp('perro');renderCart();
+</script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+{
+  "functions": {
+    "api/route.js": {
+      "includeFiles": "data/**/*.sql"
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/api/:path*",
+      "destination": "/api/route?__originalPath=/:path*"
+    },
+    {
+      "source": "/admin",
+      "destination": "/admin.html"
+    }
+  ]
+}
