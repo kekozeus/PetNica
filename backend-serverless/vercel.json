@@ -1,4 +1,6 @@
 {
+  "buildCommand": "npm --prefix ../Angular-frontend install && npm --prefix ../Angular-frontend run build",
+  "outputDirectory": "public",
   "functions": {
     "api/route.js": {
       "includeFiles": "data/**/*.sql"
@@ -11,7 +13,11 @@
     },
     {
       "source": "/admin",
-      "destination": "/admin.html"
+      "destination": "/client/index.html"
+    },
+    {
+      "source": "/",
+      "destination": "/client/index.html"
     }
   ]
 }

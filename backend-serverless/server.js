@@ -49,7 +49,10 @@ app.use(session({
     maxAge: 8 * 60 * 60 * 1000,
   },
 }));
-if (!process.env.VERCEL) app.use(express.static(path.join(__dirname, 'public')));
+if (!process.env.VERCEL) {
+  app.use('/images', express.static(path.join(__dirname, 'public', 'images')));
+  app.use('/client', express.static(path.join(__dirname, 'public', 'client')));
+}
 
 pool.on('error', (error) => {
   console.error('Error inesperado en el pool de PostgreSQL:', error);
@@ -77,9 +80,12 @@ const googleClient = process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_S
   )
   : null;
 
-app.get('/admin', (_request, response) => {
-  response.sendFile(path.join(__dirname, 'public', 'admin.html'));
-});
+const frontendIndex = path.join(__dirname, 'public', 'client', 'index.html');
+
+if (!process.env.VERCEL) {
+  app.get('/', (_request, response) => response.sendFile(frontendIndex));
+  app.get('/admin', (_request, response) => response.sendFile(frontendIndex));
+}
 
 app.use('/api/admin', createAdminRouter({
   pool,
@@ -553,6 +559,13 @@ app.post('/api/orders', async (request, response, next) => {
     client.release();
   }
 });
+
+if (!process.env.VERCEL) {
+  app.get('*', (request, response, next) => {
+    if (request.path === '/api' || request.path.startsWith('/api/')) return next();
+    return response.sendFile(frontendIndex);
+  });
+}
 
 app.use((error, _request, response, _next) => {
   if (error.status || error.code === 'LIMIT_FILE_SIZE' || error.type === 'entity.parse.failed') {

@@ -1,0 +1,79 @@
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/utilities.css" layer(utilities);
+
+#root { min-height: 100vh; }
+button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible { 
+  outline: 3px solid var(--aqua); 
+  outline-offset: 3px; 
+}
+.modal-backdrop { 
+  position: fixed; 
+  z-index: 20; 
+  inset: 0; 
+  display: grid; 
+  place-items: center; 
+  padding: 14px; 
+  overflow-y: auto; 
+  background: rgba(5,25,24,.58); 
+  backdrop-filter: blur(3px); 
+}
+.account-dialog, .product-dialog { 
+  position: relative; 
+  inset: auto; 
+  margin: auto; 
+}
+.account-dialog { 
+  width: min(500px, 100%); 
+}
+.product-dialog { 
+  width: min(970px, 100%); 
+}
+.product-backdrop { 
+  z-index: 21; 
+}
+.account-backdrop { 
+  z-index: 30; 
+}
+#cart { 
+  z-index: 23; 
+}
+.veil { 
+  z-index: 22; 
+}
+#checkout .form-grid { 
+  grid-template-columns: 1fr 1fr; 
+}
+.order-success a { 
+  color: var(--aqua); 
+}
+.admin-main { 
+  width: min(1100px, 
+  calc(100% - 40px)); 
+  margin: 42px auto 70px; 
+}
+.admin-main .message { margin: 16px 0 0; }
+.admin-main .login-card { margin: 7vh auto; }
+.admin-main .active-check { 
+  display: flex; 
+  align-items: center; 
+  gap: 5px; 
+  padding-bottom: 9px; 
+  white-space: nowrap; 
+}
+.admin-main .active-check input { 
+  width: auto; 
+  min-height: auto; 
+  accent-color: var(--aqua); 
+}
+.variant-row { margin: 0; }
+.product-edit { margin: 0; }
+.admin-main .product-image-form { margin-top: 8px; }
+.admin-main .product-image-form input { min-height: 35px; }
+.admin-main .variant-create { padding-top: 10px; }
+.admin-main .order-actions select { min-width: 175px; }
+@media (max-width: 760px) {
+  .admin-main { width: calc(100% - 28px); margin-top: 27px; }
+  .admin-main .login-card { margin: 5vh auto; }
+  .detail-layout, .detail-reviews { grid-template-columns: 1fr; }
+  .customer-order-top { flex-direction: column; }
+}
