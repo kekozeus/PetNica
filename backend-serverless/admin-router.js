@@ -1,6 +1,4 @@
 const crypto = require('node:crypto');
-const fs = require('node:fs/promises');
-const path = require('node:path');
 const express = require('express');
 const bcrypt = require('bcryptjs');
 const multer = require('multer');
@@ -47,8 +45,11 @@ function nonNegativeNumber(value, label, { integer = false, max = 99999999 } = {
 function sameOrigin(request) {
   const origin = request.get('origin');
   if (!origin) throw httpError(403, 'Solicitud sin origen válido.');
+  // request.hostname respeta X-Forwarded-Host cuando trust proxy está activo,
+  // lo necesario cuando /api se reescribe desde otro proyecto Vercel.
+  const hosts = new Set([request.get('host'), request.hostname]);
   try {
-    if (new URL(origin).host !== request.get('host')) throw httpError(403, 'Origen de solicitud no permitido.');
+    if (!hosts.has(new URL(origin).host)) throw httpError(403, 'Origen de solicitud no permitido.');
   } catch (error) {
     if (error.status) throw error;
     throw httpError(403, 'Origen de solicitud no permitido.');
@@ -124,7 +125,7 @@ async function withTransaction(pool, callback) {
   }
 }
 
-function createAdminRouter({ pool, imageDirectory, loginLimiter }) {
+function createAdminRouter({ pool, imageStorage, loginLimiter }) {
   const router = express.Router();
   const uploadImage = makeImageUpload();
 
@@ -185,6 +186,9 @@ function createAdminRouter({ pool, imageDirectory, loginLimiter }) {
                   ORDER BY pi.sort_order, pi.image_id LIMIT 1),
                  '/images/' || p.slug || '.jpg'
                ) AS image,
+               EXISTS (
+                 SELECT 1 FROM product_images pi WHERE pi.product_id = p.product_id
+               ) AS "hasImage",
                COALESCE(json_agg(json_build_object(
                  'id', v.variant_id, 'sku', v.sku, 'presentation', v.presentation,
                  'price', v.price_nio, 'stock', v.stock_qty, 'active', v.is_active
@@ -320,33 +324,59 @@ function createAdminRouter({ pool, imageDirectory, loginLimiter }) {
     if (!request.file) throw httpError(400, 'Selecciona una imagen JPG, PNG o WebP de hasta 5 MB.');
     const type = imageType(request.file.buffer);
     if (!type) throw httpError(400, 'El archivo no contiene una imagen JPG, PNG o WebP válida.');
-    const product = await pool.query('SELECT 1 FROM products WHERE product_id = $1', [productId]);
-    if (!product.rowCount) throw httpError(404, 'No se encontró el producto.');
-    const filename = `admin-${crypto.randomUUID()}.${type.extension}`;
-    const filePath = path.join(imageDirectory, filename);
-    await fs.mkdir(imageDirectory, { recursive: true });
-    await fs.writeFile(filePath, request.file.buffer, { flag: 'wx' });
-    const url = `/images/${filename}`;
+    let stored;
+    let previousUrls = [];
     try {
       await withTransaction(pool, async (client) => {
+        const product = await client.query(
+          'SELECT product_id FROM products WHERE product_id = $1 FOR UPDATE',
+          [productId],
+        );
+        if (!product.rowCount) throw httpError(404, 'No se encontró el producto.');
+        const previous = await client.query(
+          'SELECT url FROM product_images WHERE product_id = $1 ORDER BY sort_order, image_id FOR UPDATE',
+          [productId],
+        );
+        previousUrls = previous.rows.map(({ url }) => url);
+        stored = await imageStorage.save({ productId, buffer: request.file.buffer, type });
         await client.query('DELETE FROM product_images WHERE product_id = $1', [productId]);
         await client.query(
           'INSERT INTO product_images (product_id, url, sort_order) VALUES ($1, $2, 0)',
-          [productId, url],
+          [productId, stored.url],
         );
       });
     } catch (error) {
-      await fs.unlink(filePath).catch((unlinkError) => {
-        console.error('No se pudo limpiar una imagen tras un error de base de datos:', unlinkError);
+      await imageStorage.remove(stored).catch((removeError) => {
+        console.error('No se pudo limpiar una imagen tras un error de base de datos:', removeError);
       });
       throw error;
     }
-    response.status(201).json({ url });
+    await Promise.all(previousUrls.filter((url) => url !== stored.url).map((url) => (
+      imageStorage.removeByUrl(url).catch((removeError) => {
+        console.error('No se pudo eliminar la imagen anterior del producto:', removeError);
+      })
+    )));
+    response.status(201).json({ url: stored.url });
   }));
 
   router.delete('/products/:productId/image', asyncRoute(async (request, response) => {
     const productId = positiveId(request.params.productId, 'El producto');
-    await pool.query('DELETE FROM product_images WHERE product_id = $1', [productId]);
+    const existing = await withTransaction(pool, async (client) => {
+      const product = await client.query(
+        'SELECT product_id FROM products WHERE product_id = $1 FOR UPDATE',
+        [productId],
+      );
+      if (!product.rowCount) throw httpError(404, 'No se encontró el producto.');
+      const urls = await client.query(
+        'SELECT url FROM product_images WHERE product_id = $1 ORDER BY sort_order, image_id FOR UPDATE',
+        [productId],
+      );
+      await client.query('DELETE FROM product_images WHERE product_id = $1', [productId]);
+      return urls.rows;
+    });
+    await Promise.all(existing.map(({ url }) => imageStorage.removeByUrl(url).catch((error) => {
+      console.error('No se pudo eliminar una imagen del almacenamiento:', error);
+    })));
     response.status(204).end();
   }));
 

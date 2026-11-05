@@ -9,7 +9,8 @@ const { rateLimit } = require('express-rate-limit');
 const { OAuth2Client } = require('google-auth-library');
 const { Pool } = require('pg');
 const { createAdminRouter } = require('./admin-router');
-const { createCustomerRouter } = require('./customer-router');
+const { createCustomerRouter, requireCsrf } = require('./customer-router');
+const { createImageStorage } = require('./image-storage');
 
 const app = express();
 const port = Number(process.env.PORT || 3000);
@@ -18,6 +19,10 @@ const pool = new Pool({
   ssl: process.env.PGSSL === 'true' ? { rejectUnauthorized: false } : undefined,
 });
 const sessionSecret = process.env.SESSION_SECRET || crypto.randomBytes(48).toString('hex');
+const imageDirectory = process.env.PRODUCT_IMAGE_DIR
+  ? path.resolve(process.env.PRODUCT_IMAGE_DIR)
+  : path.join(__dirname, 'public', 'images');
+const imageStorage = createImageStorage({ imageDirectory });
 const PgSession = connectPgSimple(session);
 
 if (!process.env.SESSION_SECRET && process.env.NODE_ENV === 'production') {
@@ -27,8 +32,28 @@ if (!process.env.SESSION_SECRET) {
   console.warn('SESSION_SECRET no configurado: las sesiones de administrador se invalidarán al reiniciar.');
 }
 
+// En producción/Vercel la cookie de sesión solo viaja por HTTPS.
+// SESSION_COOKIE_SECURE=false es la válvula para pruebas locales sin TLS.
+const secureSessionCookie = process.env.SESSION_COOKIE_SECURE
+  ? process.env.SESSION_COOKIE_SECURE === 'true'
+  : Boolean(process.env.VERCEL) || process.env.NODE_ENV === 'production';
+
 app.disable('x-powered-by');
 if (process.env.TRUST_PROXY === 'true') app.set('trust proxy', 1);
+app.use((request, response, next) => {
+  response.set('X-Content-Type-Options', 'nosniff');
+  response.set('X-Frame-Options', 'DENY');
+  response.set('Referrer-Policy', 'strict-origin-when-cross-origin');
+  response.set('Permissions-Policy', 'camera=(), microphone=(), geolocation=(), payment=()');
+  if (request.secure || process.env.VERCEL) {
+    response.set('Strict-Transport-Security', 'max-age=15552000; includeSubDomains');
+  }
+  if (request.path.startsWith('/api/account/') || request.path.startsWith('/api/admin/')
+    || request.path === '/api/orders') {
+    response.set('Cache-Control', 'no-store');
+  }
+  next();
+});
 app.use(express.json({ limit: '32kb' }));
 app.use(session({
   name: 'petnica.sid',
@@ -45,12 +70,12 @@ app.use(session({
   cookie: {
     httpOnly: true,
     sameSite: 'lax',
-    secure: 'auto',
+    secure: secureSessionCookie,
     maxAge: 8 * 60 * 60 * 1000,
   },
 }));
 if (!process.env.VERCEL) {
-  app.use('/images', express.static(path.join(__dirname, 'public', 'images')));
+  app.use('/images', express.static(imageDirectory));
   app.use('/client', express.static(path.join(__dirname, 'public', 'client')));
 }
 
@@ -72,6 +97,13 @@ const customerAuthLimiter = rateLimit({
   legacyHeaders: false,
   message: { error: 'Demasiados intentos. Espera 15 minutos y vuelve a intentarlo.' },
 });
+const orderLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  limit: 20,
+  standardHeaders: 'draft-8',
+  legacyHeaders: false,
+  message: { error: 'Demasiados pedidos seguidos. Espera unos minutos y vuelve a intentarlo.' },
+});
 const googleClient = process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET
   ? new OAuth2Client(
     process.env.GOOGLE_CLIENT_ID,
@@ -84,12 +116,12 @@ const frontendIndex = path.join(__dirname, 'public', 'client', 'index.html');
 
 if (!process.env.VERCEL) {
   app.get('/', (_request, response) => response.sendFile(frontendIndex));
-  app.get('/admin', (_request, response) => response.sendFile(frontendIndex));
+  app.get(['/admin', '/admin/*'], (_request, response) => response.sendFile(frontendIndex));
 }
 
 app.use('/api/admin', createAdminRouter({
   pool,
-  imageDirectory: path.join(__dirname, 'public', 'images'),
+  imageStorage,
   loginLimiter,
 }));
 app.use('/api/account', createCustomerRouter({
@@ -281,13 +313,14 @@ app.get('/api/products/:productId', async (request, response, next) => {
   }
 });
 
-app.post('/api/orders', async (request, response, next) => {
+app.post('/api/orders', orderLimiter, (request, response, next) => {
   if (!request.session?.customer?.id) {
     const error = new Error('Inicia sesión para confirmar tu pedido.');
     error.status = 401;
     return next(error);
   }
-
+  return requireCsrf(request, response, next);
+}, async (request, response, next) => {
   const client = await pool.connect().catch(next);
   if (!client) return;
 

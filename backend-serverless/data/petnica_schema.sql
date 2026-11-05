@@ -220,7 +220,7 @@ CREATE TABLE order_delivery_reviews (
     review_id    BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     order_id     BIGINT NOT NULL UNIQUE REFERENCES orders(order_id) ON DELETE CASCADE,
     customer_id  BIGINT NOT NULL REFERENCES customers(customer_id) ON DELETE CASCADE,
-    rating       SMALLINT NOT NULL CHECK (rating BETWEEN 1 AND 5),
+    rating       SMALLINT CHECK (rating BETWEEN 1 AND 5), NULL,
     comment      TEXT,
     created_at   TIMESTAMPTZ NOT NULL DEFAULT now()
 );

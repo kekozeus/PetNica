@@ -41,8 +41,11 @@ function positiveId(value, label) {
 function sameOrigin(request) {
   const origin = request.get('origin');
   if (!origin) throw httpError(403, 'Solicitud sin origen válido.');
+  // request.hostname respeta X-Forwarded-Host cuando trust proxy está activo,
+  // lo necesario cuando /api se reescribe desde otro proyecto Vercel.
+  const hosts = new Set([request.get('host'), request.hostname]);
   try {
-    if (new URL(origin).host !== request.get('host')) throw httpError(403, 'Origen de solicitud no permitido.');
+    if (!hosts.has(new URL(origin).host)) throw httpError(403, 'Origen de solicitud no permitido.');
   } catch (error) {
     if (error.status) throw error;
     throw httpError(403, 'Origen de solicitud no permitido.');
@@ -299,12 +302,15 @@ function createCustomerRouter({ pool, authLimiter, googleClient }) {
   }));
 
   router.post('/logout', requireCustomer, requireCsrf, (request, response, next) => {
-    delete request.session.customer;
-    delete request.session.googleOAuth;
-    request.session.customerCsrfToken = crypto.randomBytes(32).toString('hex');
-    request.session.save((error) => {
+    // session.regenerate destruye la sesión anterior en el almacén y emite un
+    // sid nuevo: el identificador previo queda invalidado al cerrar sesión.
+    request.session.regenerate((error) => {
       if (error) return next(error);
-      response.json({ authenticated: false, csrfToken: request.session.customerCsrfToken });
+      request.session.customerCsrfToken = crypto.randomBytes(32).toString('hex');
+      request.session.save((saveError) => {
+        if (saveError) return next(saveError);
+        response.json({ authenticated: false, csrfToken: request.session.customerCsrfToken });
+      });
     });
   });
 

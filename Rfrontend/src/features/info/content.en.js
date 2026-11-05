@@ -1,0 +1,121 @@
+const section = (title, paragraphs = [], items = []) => ({ title, paragraphs, items })
+
+export const infoContentEn = {
+  nav: {
+    purchase: 'How to order',
+    contact: 'Contact',
+    about: 'About us',
+    faq: 'FAQ',
+    privacy: 'Privacy',
+    returns: 'Returns',
+    shipping: 'Shipping',
+    terms: 'Purchase terms',
+  },
+  backToStore: 'Back to the store',
+  contactTitle: 'PetNica support',
+  contactIntro: 'Contact us about products, orders, payments, or delivery.',
+  whatsapp: 'Message us on WhatsApp',
+  email: 'Send an email',
+  noContacts: 'Support channels will appear here once configured.',
+  updated: 'Last updated: October 23, 2026',
+  pages: {
+    purchase: {
+      eyebrow: 'YOUR ORDER, STEP BY STEP',
+      title: 'How to order',
+      summary: 'Choose what your pet needs and provide the details to arrange delivery.',
+      sections: [
+        section('Choose their favorites', ['Browse the catalog, select a presentation, and add available products to your cart. Price and stock are checked again when the order is placed.']),
+        section('Sign in', ['You need a PetNica account to place an order. Create one with your email or use Google sign-in if it is available.']),
+        section('Tell us where to deliver', ['Enter your district, neighborhood, and directions to help us find the address. Delivery cost and estimated time depend on the area and are shown during checkout.']),
+        section('Choose how to pay', ['Pay cash on delivery or by bank transfer. PetNica does not process card payments. Transfers remain pending until verified.']),
+        section('Place and coordinate your order', ['When you confirm, the system checks price, stock, and discounts again before recording the order. You can then continue on WhatsApp to coordinate delivery details.']),
+      ],
+    },
+    contact: {
+      eyebrow: 'WE ARE HERE TO HELP',
+      title: 'Contact',
+      summary: 'Reach PetNica with questions before or after your purchase.',
+      sections: [
+        section('Customer support', ['Contact us about availability, product presentations, orders, payments, delivery, or a damaged item. Include your order number if you have already purchased.']),
+        section('Delivery area', ['PetNica delivers in Managua and nearby areas. Availability and timing depend on the district selected at checkout.']),
+      ],
+    },
+    about: {
+      eyebrow: 'A HAPPIER LIFE, ONE PAW AT A TIME',
+      title: 'About PetNica',
+      summary: 'An online store for dogs and cats, delivering in Managua and nearby areas.',
+      sections: [
+        section('What we do', ['We bring together food, toys, and accessories for dogs and cats. We also offer PetBox selections to support your pet’s care.']),
+        section('Friendly support', ['We want choosing and receiving an order to feel clear. That is why available presentations, stock, and delivery information are shown before you confirm.']),
+        section('Where we are', ['PetNica serves customers from Managua, Nicaragua, and coordinates delivery based on the areas available at checkout.']),
+      ],
+    },
+    faq: {
+      eyebrow: 'CLEAR ANSWERS',
+      title: 'Frequently asked questions',
+      summary: 'Useful information about ordering, payment, and delivery.',
+      sections: [
+        section('Where do you deliver?', ['The store serves Managua and nearby areas. Select your district at checkout to see whether it is available.']),
+        section('How much is delivery and how long does it take?', ['Cost and estimated delivery time are shown for the selected district. Delivery is confirmed when the order is coordinated.']),
+        section('Which payment methods do you accept?', ['Pay cash on delivery or by bank transfer. The store does not process card payments.']),
+        section('Do I need an account to order?', ['Yes. Sign in or create a PetNica account to place an order and view your order history.']),
+        section('When is a bank transfer confirmed?', ['A transfer remains pending until PetNica verifies the payment. You can continue coordinating by WhatsApp after the order is recorded.']),
+        section('What if an item arrives damaged?', ['Report it within two days of delivery. This policy applies only to damaged products; keep the item unopened and retain its packaging.']),
+        section('How does PetBox work?', ['PetBox offers a monthly selection of products for your pet. Plan details, pricing, and available terms are shown in the PetBox section before you subscribe.']),
+        section('Can I leave a review?', ['With an account, you can review a product included in a delivered order. Delivery reviews are also enabled when applicable to the order.']),
+      ],
+    },
+    privacy: {
+      eyebrow: 'YOUR INFORMATION',
+      title: 'Privacy policy',
+      summary: 'How PetNica uses information to manage accounts, orders, and delivery.',
+      sections: [
+        section('Information we receive', ['When you create an account or place an order, we may receive your name, email, and, if provided, WhatsApp number. Delivery requires your district, neighborhood, and directions. PetBox may also require your pet’s name and size.']),
+        section('Cart and preferences', ['A guest cart may be saved in your browser’s local storage. Your language choice is also saved on your device. When you sign in, your cart may sync with your account.']),
+        section('How information is used', ['We use this information to manage your account, record and fulfill orders, calculate delivery, verify bank transfers, and respond to service-related questions.']),
+        section('Accounts and external services', ['Passwords are stored as a hash, not in plain text. If you choose Google sign-in, Google participates in authentication and shares the information needed to create or recognize your account.']),
+        section('Payments and retention', ['PetNica does not receive card data or process card payments. Order and transfer records are retained to provide the service and meet applicable obligations. Contact us through the channels on this page with questions about your information.']),
+      ],
+    },
+    returns: {
+      eyebrow: 'IF SOMETHING ARRIVED DAMAGED',
+      title: 'Returns and exchanges',
+      summary: 'This policy applies only to damaged products. Keep the item unopened and retain its packaging.',
+      sections: [
+        section('Reporting period', ['Contact PetNica within two days of receiving your order.']),
+        section('Eligible products', ['This policy covers damaged products only. Keep the item unopened and retain its packaging so PetNica can review the case.']),
+        section('How to request a review', ['Contact us through one of the published support channels and include your order number and a description of the damage. PetNica will review the information and provide next steps.']),
+        section('Before placing an order', ['Ask us about a product, presentation, or quantity before confirming if you are unsure. Availability is checked when the order is placed.']),
+      ],
+    },
+    shipping: {
+      eyebrow: 'DELIVERED TO YOUR DOOR',
+      title: 'Shipping and delivery',
+      summary: 'Coverage, cost, and delivery time depend on the district available at checkout.',
+      sections: [
+        section('Coverage', ['PetNica coordinates deliveries in Managua and nearby areas. Available districts appear at checkout.']),
+        section('Cost and estimated time', ['The selected district determines the delivery fee and estimated time shown at checkout. The final details are confirmed when the order is coordinated.']),
+        section('Delivery details', ['Provide your neighborhood and directions that help us find the address. A WhatsApp number is optional at checkout but may help us coordinate.']),
+        section('Coordination', ['After placing your order, you can continue on WhatsApp to confirm the details. Please make sure someone is available to receive it.']),
+      ],
+    },
+    terms: {
+      eyebrow: 'BEFORE YOU CONFIRM',
+      title: 'Purchase terms',
+      summary: 'These terms explain how PetNica orders are placed and coordinated.',
+      sections: [
+        section('Account and order', ['A PetNica account is required to place an order. Review products, presentations, quantities, and delivery details before submitting.']),
+        section('Price, stock, and discounts', ['The system rechecks price, stock, and discount eligibility when an order is placed. If any information changes or an item is unavailable, the order is not confirmed using the previous details.']),
+        section('Payment', ['Available methods are cash on delivery and bank transfer. PetNica does not process card payments. A transfer remains pending until verified.']),
+        section('Delivery', ['Coverage, cost, and estimated time depend on the district. These details appear during checkout and are coordinated after the order is recorded.']),
+        section('Couriers and delivery proof', [
+          'Orders are delivered by authorized PetNica couriers, who may mark your order as on the way and, once the handoff is completed, as delivered.',
+          'When your order is handed over, the courier records a delivery proof consisting of a video of the handoff and the digital signature of the person who receives it, along with their name. This information is kept as service evidence and may be reviewed by PetNica in case of disputes.',
+          'The order may be received by the person who placed it or by someone authorized at the provided address. By signing, that person confirms the order was received as expected.',
+        ]),
+        section('Promotions and PetBox', ['Promotions are subject to the terms shown when applied and to system validation. PetBox plan details are shown before you subscribe.']),
+        section('Reviews', ['Product reviews are available to signed-in customers whose delivered orders include the product.']),
+      ],
+    },
+  },
+}

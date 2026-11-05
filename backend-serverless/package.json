@@ -11,7 +11,7 @@
     "start": "node server.js",
     "dev": "node --watch server.js",
     "admin:create": "node scripts/create-admin.js",
-    "check": "node --check server.js && node --check admin-router.js && node --check customer-router.js && node --check scripts/create-admin.js && node --check api/route.js && node --check public/app.js && node --check public/admin.js"
+    "check": "node --check server.js && node --check admin-router.js && node --check image-storage.js && node --check customer-router.js && node --check scripts/create-admin.js && node --check api/route.js && node --check public/app.js && node --check public/admin.js"
   },
   "dependencies": {
     "bcryptjs": "^3.0.3",

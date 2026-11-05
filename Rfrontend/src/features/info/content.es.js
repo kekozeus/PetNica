@@ -1,0 +1,121 @@
+const section = (title, paragraphs = [], items = []) => ({ title, paragraphs, items })
+
+export const infoContentEs = {
+  nav: {
+    purchase: 'Proceso de compra',
+    contact: 'Contacto',
+    about: 'Acerca de nosotros',
+    faq: 'Preguntas frecuentes',
+    privacy: 'Privacidad',
+    returns: 'Cambios y devoluciones',
+    shipping: 'Envíos',
+    terms: 'Condiciones de compra',
+  },
+  backToStore: 'Volver a la tienda',
+  contactTitle: 'Atención PetNica',
+  contactIntro: 'Escríbenos para consultar productos, pedidos, pagos o entregas.',
+  whatsapp: 'Escribir por WhatsApp',
+  email: 'Enviar correo',
+  noContacts: 'Los canales de atención se publicarán aquí cuando estén configurados.',
+  updated: 'Última actualización: 23 de octubre de 2026',
+  pages: {
+    purchase: {
+      eyebrow: 'TU PEDIDO, PASO A PASO',
+      title: 'Cómo comprar',
+      summary: 'Elige lo que necesita tu mascota y completa los datos para coordinar la entrega.',
+      sections: [
+        section('Elige sus favoritos', ['Explora el catálogo, selecciona una presentación y agrega los productos disponibles al carrito. El precio y las existencias se verifican al registrar el pedido.']),
+        section('Inicia sesión', ['Para confirmar un pedido necesitas una cuenta PetNica. Puedes crearla con tu correo o usar el acceso con Google si está disponible.']),
+        section('Indica dónde entregar', ['Completa el distrito, barrio o residencial y una referencia para encontrar la dirección. El costo y el plazo estimado dependen de la zona y se muestran durante la compra.']),
+        section('Selecciona cómo pagar', ['Puedes pagar en efectivo contra entrega o por transferencia bancaria. PetNica no procesa pagos con tarjeta. Las transferencias quedan pendientes de verificación.']),
+        section('Confirma y coordina', ['Al confirmar, el sistema vuelve a comprobar el precio, el inventario y los descuentos antes de registrar el pedido. Después puedes continuar por WhatsApp para coordinar los detalles de la entrega.']),
+      ],
+    },
+    contact: {
+      eyebrow: 'ESTAMOS PARA AYUDARTE',
+      title: 'Contacto',
+      summary: 'Comunícate con PetNica para resolver dudas antes o después de tu compra.',
+      sections: [
+        section('Atención al cliente', ['Escríbenos para consultar disponibilidad, presentaciones, pedidos, pagos, entregas o un producto dañado. Incluye el número de pedido si ya compraste.']),
+        section('Zona de atención', ['PetNica realiza entregas en Managua y zonas cercanas. La disponibilidad y el plazo dependen del distrito indicado al hacer el pedido.']),
+      ],
+    },
+    about: {
+      eyebrow: 'UNA VIDA MÁS FELIZ, PATITA A PATITA',
+      title: 'Acerca de PetNica',
+      summary: 'Una tienda en línea para encontrar productos de perros y gatos, con entrega en Managua y alrededores.',
+      sections: [
+        section('Lo que hacemos', ['Reunimos alimentos, juguetes y accesorios para perros y gatos en un solo lugar. También ofrecemos PetBox con artículos seleccionados para acompañar el cuidado de tu mascota.']),
+        section('Atención cercana', ['Queremos que elegir y recibir un pedido sea claro. Por eso mostramos las presentaciones disponibles, las existencias y la información de entrega antes de confirmar.']),
+        section('Dónde estamos', ['PetNica atiende desde Managua, Nicaragua, y coordina entregas según la zona disponible en el checkout.']),
+      ],
+    },
+    faq: {
+      eyebrow: 'RESPUESTAS CLARAS',
+      title: 'Preguntas frecuentes',
+      summary: 'Información útil para comprar, pagar y recibir tu pedido.',
+      sections: [
+        section('¿A qué zonas entregan?', ['La tienda atiende Managua y alrededores. Selecciona tu distrito en el checkout para ver si está disponible.']),
+        section('¿Cuánto cuesta y cuánto tarda el envío?', ['El costo y el plazo estimado se muestran según el distrito seleccionado. La entrega se confirma al coordinar el pedido.']),
+        section('¿Qué métodos de pago aceptan?', ['Puedes pagar en efectivo contra entrega o por transferencia bancaria. No se procesan tarjetas en la tienda.']),
+        section('¿Necesito una cuenta para comprar?', ['Sí. Inicia sesión o crea una cuenta PetNica para confirmar el pedido y consultar tu historial.']),
+        section('¿Cuándo se confirma una transferencia?', ['La transferencia queda pendiente hasta que PetNica verifique el pago. Puedes continuar la coordinación por WhatsApp después de registrar el pedido.']),
+        section('¿Qué hago si recibo un producto dañado?', ['Repórtalo dentro de los dos días posteriores a la entrega. La política aplica únicamente a productos dañados y el artículo debe mantenerse sin abrir, con su empaque.']),
+        section('¿Cómo funciona PetBox?', ['PetBox ofrece una selección mensual de productos para tu mascota. El plan, precio y condiciones disponibles aparecen en la sección PetBox antes de suscribirte.']),
+        section('¿Puedo dejar una opinión?', ['Con una cuenta puedes publicar una opinión sobre un producto de un pedido entregado. La opinión de entrega también se habilita cuando corresponda al pedido.']),
+      ],
+    },
+    privacy: {
+      eyebrow: 'TUS DATOS',
+      title: 'Política de privacidad',
+      summary: 'Qué información se usa para administrar cuentas, pedidos y entregas en PetNica.',
+      sections: [
+        section('Información que recibimos', ['Al crear una cuenta o realizar un pedido podemos recibir nombre, apellido, correo y, si lo proporcionas, número de WhatsApp. Para la entrega se solicita distrito, barrio o residencial y una referencia. Para PetBox también podemos solicitar el nombre y tamaño de la mascota.']),
+        section('Carrito y preferencias', ['El carrito de una visita puede guardarse en el almacenamiento local del navegador. El idioma elegido también se guarda en el dispositivo. Al iniciar sesión, el carrito puede sincronizarse con tu cuenta.']),
+        section('Para qué se utiliza', ['Usamos estos datos para administrar la cuenta, registrar y atender pedidos, calcular la entrega, verificar pagos por transferencia y responder consultas relacionadas con el servicio.']),
+        section('Cuenta y servicios externos', ['Las contraseñas se guardan mediante un hash, no en texto plano. Si eliges iniciar sesión con Google, Google participa en la autenticación y comparte los datos necesarios para crear o reconocer la cuenta.']),
+        section('Pagos y conservación', ['PetNica no recibe datos de tarjetas ni procesa pagos con tarjeta. Los datos de pedidos y transferencias se conservan para administrar el servicio y atender obligaciones aplicables. Para una consulta sobre tus datos, usa los canales de contacto publicados en esta página.']),
+      ],
+    },
+    returns: {
+      eyebrow: 'SI ALGO NO LLEGÓ BIEN',
+      title: 'Cambios y devoluciones',
+      summary: 'La política aplica únicamente a productos dañados y requiere conservar el artículo sin abrir y su empaque.',
+      sections: [
+        section('Plazo para reportar', ['Contacta a PetNica dentro de los dos días posteriores a la recepción del pedido.']),
+        section('Productos cubiertos', ['Esta política cubre únicamente productos dañados. El producto debe permanecer sin abrir y conservar su empaque para que PetNica pueda revisar el caso.']),
+        section('Cómo solicitar una revisión', ['Escríbenos por uno de los canales de contacto publicados e incluye el número de pedido y una descripción del daño. PetNica revisará la información y te indicará los siguientes pasos.']),
+        section('Antes de enviar el pedido', ['Si tienes dudas sobre una presentación, producto o cantidad, consúltanos antes de confirmar. La disponibilidad se valida al registrar el pedido.']),
+      ],
+    },
+    shipping: {
+      eyebrow: 'HASTA TU PUERTA',
+      title: 'Envíos y entregas',
+      summary: 'La cobertura, el costo y el plazo dependen del distrito disponible en el checkout.',
+      sections: [
+        section('Cobertura', ['PetNica coordina entregas en Managua y zonas cercanas. Las zonas disponibles aparecen en el checkout.']),
+        section('Costo y plazo estimado', ['Al seleccionar un distrito se muestran el costo de envío y el plazo estimado correspondiente. El monto final se confirma al coordinar el pedido. Un pedido puede retrasarse debido a condiciones climáticas o de tránsito. El cliente esta en su derecho de llegar al local a reclamar su pedido.']),
+        section('Datos de dirección', ['Indica el barrio o residencial y una referencia que ayude a ubicar la dirección. Un número de WhatsApp es opcional en el checkout, pero puede facilitar la coordinación.']),
+        section('Coordinación', ['Después de registrar el pedido puedes continuar por WhatsApp para confirmar los detalles. Asegúrate de que haya alguien disponible para recibirlo.']),
+      ],
+    },
+    terms: {
+      eyebrow: 'ANTES DE CONFIRMAR',
+      title: 'Condiciones de compra',
+      summary: 'Estas condiciones describen cómo se registran y coordinan los pedidos en PetNica.',
+      sections: [
+        section('Cuenta y pedido', ['Para confirmar una compra necesitas una cuenta PetNica. Revisa los productos, presentaciones, cantidades y dirección antes de enviar el pedido.']),
+        section('Precio, inventario y descuentos', ['El sistema verifica nuevamente el precio, las existencias y la validez del descuento al registrar el pedido. Si algún dato cambia o no hay disponibilidad, el pedido no se confirma con la información anterior.']),
+        section('Pago', ['Los métodos disponibles son efectivo contra entrega y transferencia bancaria. PetNica no procesa tarjetas. Una transferencia se considera pendiente hasta verificar el pago.']),
+        section('Entrega', ['La cobertura, costo y plazo estimado dependen del distrito. Estos datos se muestran durante la compra y se coordinan después del registro.']),
+        section('Repartidores y prueba de entrega', [
+          'Los pedidos son entregados por repartidores autorizados de PetNica, quienes pueden marcar tu pedido como en camino y, al concretar la entrega, como entregado.',
+          'Al entregar el pedido, el repartidor registra una prueba de entrega que consiste en un video de la entrega y la firma digital de la persona que lo recibe, junto con su nombre. Estos datos se conservan como evidencia del servicio y pueden ser revisados por PetNica en caso de reclamos.',
+          'Quien recibe el pedido puede ser la persona que realizó la compra u otra persona autorizada en la dirección indicada. Al firmar, confirma que el pedido fue recibido conforme.',
+        ]),
+        section('Promociones y PetBox', ['Las promociones están sujetas a las condiciones que aparecen al aplicarlas y a la validación del sistema. Los detalles del plan PetBox se muestran antes de suscribirte.']),
+        section('Opiniones', ['Las opiniones de productos se habilitan para clientes con sesión y pedidos entregados que incluyan ese producto.']),
+      ],
+    },
+  },
+}

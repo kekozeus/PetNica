@@ -14,8 +14,10 @@ module.exports = async (request, response) => {
     return app(request, response);
   } catch (error) {
     console.error('No se pudo preparar la base de datos de PetNica:', error);
-    return response.status(503).json({
+    response.statusCode = 503;
+    response.setHeader('Content-Type', 'application/json');
+    return response.end(JSON.stringify({
       error: 'El backend no está disponible por un problema de configuración o base de datos.',
-    });
+    }));
   }
 };

@@ -1006,13 +1006,7 @@ async function submitOrder(event) {
   };
 
   try {
-    const response = await fetch("/api/orders", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
-    });
-    const result = await response.json();
-    if (!response.ok) throw new Error(result.error || "No se pudo registrar el pedido.");
+    const result = await accountRequest("/api/orders", { method: "POST", body: payload });
     state.orderCreated = true;
     const link = whatsappLink(result);
     $("#orderSuccess").innerHTML = `

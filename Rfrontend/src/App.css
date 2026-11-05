@@ -1,0 +1,156 @@
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/utilities.css" layer(utilities);
+
+#root { min-height: 100vh; }
+.app-loading {
+  --loading-bg: #f4f9f8;
+  --loading-surface: #fff;
+  --loading-ink: #0e3b3a;
+  --loading-muted: #587472;
+  --loading-line: #d9e8e5;
+  --loading-aqua: #1f9e8f;
+  --loading-mango: #ffb020;
+  position: fixed;
+  z-index: 100;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  min-height: 100svh;
+  padding: 24px;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 50% 44%, color-mix(in srgb, var(--loading-aqua) 13%, transparent), transparent 25rem),
+    var(--loading-bg);
+  color: var(--loading-ink);
+}
+.loading-content {
+  display: grid;
+  justify-items: center;
+  gap: 18px;
+}
+.loading-mark {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 156px;
+  height: 156px;
+  border: 1px solid color-mix(in srgb, var(--loading-aqua) 24%, var(--loading-line));
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--loading-aqua) 8%, var(--loading-surface));
+  box-shadow: 0 18px 48px color-mix(in srgb, var(--loading-ink) 14%, transparent);
+}
+.loading-spinner {
+  position: absolute;
+  inset: 0;
+  border: 2px solid color-mix(in srgb, var(--loading-aqua) 17%, transparent);
+  border-top-color: var(--loading-mango);
+  border-right-color: var(--loading-aqua);
+  border-radius: inherit;
+}
+.loading-icon {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background: var(--loading-surface);
+  object-fit: cover;
+  object-position: center;
+  box-shadow: 0 5px 16px color-mix(in srgb, var(--loading-ink) 14%, transparent);
+}
+.loading-label {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  margin: 0;
+  color: var(--loading-muted);
+  font: 700 1rem/1.4 "Nunito Sans", system-ui, sans-serif;
+}
+.loading-label strong {
+  color: var(--loading-ink);
+  font-weight: 900;
+}
+@media (prefers-color-scheme: dark) {
+  .app-loading {
+    --loading-bg: #0b1f1f;
+    --loading-surface: #12302f;
+    --loading-ink: #eaf6f4;
+    --loading-muted: #a1bfbb;
+    --loading-line: #244746;
+    --loading-aqua: #59c8b8;
+    --loading-mango: #ffb020;
+  }
+}
+button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible { 
+  outline: 3px solid var(--aqua); 
+  outline-offset: 3px; 
+}
+.modal-backdrop { 
+  position: fixed; 
+  z-index: 20; 
+  inset: 0; 
+  display: grid; 
+  place-items: center; 
+  padding: 14px; 
+  overflow-y: auto; 
+  background: rgba(5,25,24,.58); 
+  backdrop-filter: blur(3px); 
+}
+.account-dialog, .product-dialog { 
+  position: relative; 
+  inset: auto; 
+  margin: auto; 
+}
+.account-dialog { 
+  width: min(500px, 100%); 
+}
+.product-dialog { 
+  width: min(970px, 100%); 
+}
+.product-backdrop { 
+  z-index: 21; 
+}
+.account-backdrop { 
+  z-index: 30; 
+}
+#cart { 
+  z-index: 23; 
+}
+.veil { 
+  z-index: 22; 
+}
+#checkout .form-grid { 
+  grid-template-columns: 1fr 1fr; 
+}
+.order-success a { 
+  color: var(--aqua); 
+}
+.admin-main { 
+  width: min(1100px, 
+  calc(100% - 40px)); 
+  margin: 42px auto 70px; 
+}
+.admin-main .message { margin: 16px 0 0; }
+.admin-main .login-card { margin: 7vh auto; }
+.admin-main .active-check { 
+  display: flex; 
+  align-items: center; 
+  gap: 5px; 
+  padding-bottom: 9px; 
+  white-space: nowrap; 
+}
+.admin-main .active-check input { 
+  width: auto; 
+  min-height: auto; 
+  accent-color: var(--aqua); 
+}
+.variant-row { margin: 0; }
+.product-edit { margin: 0; }
+.admin-main .product-image-form { margin-top: 8px; }
+.admin-main .product-image-form input { min-height: 35px; }
+.admin-main .variant-create { padding-top: 10px; }
+.admin-main .order-actions select { min-width: 175px; }
+@media (max-width: 760px) {
+  .admin-main { width: calc(100% - 28px); margin-top: 27px; }
+  .admin-main .login-card { margin: 5vh auto; }
+  .detail-layout, .detail-reviews { grid-template-columns: 1fr; }
+  .customer-order-top { flex-direction: column; }
+}

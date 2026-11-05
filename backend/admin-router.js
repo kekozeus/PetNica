@@ -47,8 +47,11 @@ function nonNegativeNumber(value, label, { integer = false, max = 99999999 } = {
 function sameOrigin(request) {
   const origin = request.get('origin');
   if (!origin) throw httpError(403, 'Solicitud sin origen válido.');
+  // request.hostname respeta X-Forwarded-Host cuando trust proxy está activo,
+  // lo necesario cuando /api se reescribe desde otro proyecto Vercel.
+  const hosts = new Set([request.get('host'), request.hostname]);
   try {
-    if (new URL(origin).host !== request.get('host')) throw httpError(403, 'Origen de solicitud no permitido.');
+    if (!hosts.has(new URL(origin).host)) throw httpError(403, 'Origen de solicitud no permitido.');
   } catch (error) {
     if (error.status) throw error;
     throw httpError(403, 'Origen de solicitud no permitido.');

@@ -1,0 +1,27 @@
+# PetNica
+
+> Tienda en línea para perros y gatos con entrega en Managua y zonas cercanas.
+
+## Sitio
+
+- [PetNica | Tienda para perros y gatos en Managua](https://petnica-frontend.vercel.app/)
+- [Cómo comprar | PetNica](https://petnica-frontend.vercel.app/proceso-de-compra)
+- [Contacto | PetNica](https://petnica-frontend.vercel.app/contacto)
+- [Acerca de PetNica](https://petnica-frontend.vercel.app/acerca-de-nosotros)
+- [Preguntas frecuentes | PetNica](https://petnica-frontend.vercel.app/preguntas-frecuentes)
+- [Política de privacidad | PetNica](https://petnica-frontend.vercel.app/politica-de-privacidad)
+- [Cambios y devoluciones | PetNica](https://petnica-frontend.vercel.app/politica-de-devoluciones)
+- [Envíos y entregas | PetNica](https://petnica-frontend.vercel.app/politica-de-envios)
+- [Condiciones de compra | PetNica](https://petnica-frontend.vercel.app/condiciones-de-compra)
+
+## Contacto
+
+- Email: mailto:petnica@gmail.com
+- WhatsApp: https://wa.me/50582279429
+
+## Información
+
+- Los pedidos requieren una cuenta PetNica.
+- Métodos de pago: efectivo contra entrega o transferencia bancaria.
+- La tienda no procesa pagos con tarjeta.
+- Cobertura, costo y plazo de entrega dependen del distrito.

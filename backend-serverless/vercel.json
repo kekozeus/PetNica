@@ -1,5 +1,6 @@
 {
-  "buildCommand": "npm --prefix ../Angular-frontend install && npm --prefix ../Angular-frontend run build",
+  "framework": null,
+  "buildCommand": "if [ -d ../Rfrontend ]; then npm --prefix ../Rfrontend install && npm --prefix ../Rfrontend run build; else echo 'Rfrontend no está en el deploy; se usa public/ tal como fue subido'; fi",
   "outputDirectory": "public",
   "functions": {
     "api/route.js": {
@@ -12,12 +13,102 @@
       "destination": "/api/route?__originalPath=/:path*"
     },
     {
+      "source": "/robots.txt",
+      "destination": "/client/robots.txt"
+    },
+    {
+      "source": "/sitemap.xml",
+      "destination": "/client/sitemap.xml"
+    },
+    {
+      "source": "/llms.txt",
+      "destination": "/client/llms.txt"
+    },
+    {
+      "source": "/llm.txt",
+      "destination": "/client/llm.txt"
+    },
+    {
+      "source": "/favicon.svg",
+      "destination": "/client/favicon.svg"
+    },
+    {
+      "source": "/icons.svg",
+      "destination": "/client/icons.svg"
+    },
+    {
+      "source": "/petnica-og.png",
+      "destination": "/client/petnica-og.png"
+    },
+    {
+      "source": "/admin/login",
+      "destination": "/client/admin/login/index.html"
+    },
+    {
+      "source": "/proceso-de-compra",
+      "destination": "/client/proceso-de-compra/index.html"
+    },
+    {
+      "source": "/contacto",
+      "destination": "/client/contacto/index.html"
+    },
+    {
+      "source": "/acerca-de-nosotros",
+      "destination": "/client/acerca-de-nosotros/index.html"
+    },
+    {
+      "source": "/preguntas-frecuentes",
+      "destination": "/client/preguntas-frecuentes/index.html"
+    },
+    {
+      "source": "/politica-de-privacidad",
+      "destination": "/client/politica-de-privacidad/index.html"
+    },
+    {
+      "source": "/politica-de-devoluciones",
+      "destination": "/client/politica-de-devoluciones/index.html"
+    },
+    {
+      "source": "/politica-de-envios",
+      "destination": "/client/politica-de-envios/index.html"
+    },
+    {
+      "source": "/condiciones-de-compra",
+      "destination": "/client/condiciones-de-compra/index.html"
+    },
+    {
       "source": "/admin",
-      "destination": "/client/index.html"
+      "destination": "/client/admin/index.html"
+    },
+    {
+      "source": "/admin/:path*",
+      "destination": "/client/admin/index.html"
     },
     {
       "source": "/",
       "destination": "/client/index.html"
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/client",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/client/index.html",
+      "destination": "/",
+      "permanent": false
+    },
+    {
+      "source": "/client/admin",
+      "destination": "/admin",
+      "permanent": false
+    },
+    {
+      "source": "/client/admin/:path*",
+      "destination": "/admin/:path*",
+      "permanent": false
     }
   ]
 }
