@@ -5,3 +5,7 @@ node_modules/
 !.env.example
 .vercel/
 npm-debug.log*
+
+frontend/
+backend/
+backend-serverless/
